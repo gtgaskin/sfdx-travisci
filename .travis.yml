@@ -7,7 +7,7 @@ env:
   global:
     secure: la9HzcnkQypeCjI2IWedrhFh9ViBB0SCEmOc5/A9YvLEEBfO7hOeFptVCREis9Yf/v3vb/oZkFytSQ6s7ratVbHeLoGdNmgR9T9v1cSOX/omgs1bWn9mywCqD5s+N+oY6zqoopx1CPfgjsuWBCkfg3ZXw/oxwxj4PDWiI3b44KtaOnmzrGXt4PCmZVqwVC70i25E8/ajX0NVUIuYC1SOZgaCXw5v/jjpi0pH7z2SQTsKdC0buwPi1SrV+Zvl718Bh9Gpv2j+Oubg4wilYMxSKIzgpy59lmeXXCfIdsi5MyMOj5WZWt2XmcCf9dxwHuVapq+Ibud9t92CKNAhRIjbDRtxt68Rw28uqyNxRo+S5KLuBNHJx/QkCzOajUe6Kr5i8I4X8FKaNgHssh35XyH5xs6Hq1ctTmPyXKt+siyWkzcgoeeeThEis/qqNSq1saNL1aoJfhYvm7PZIwFHmg0tpV54605UnsYW4QqpL/aBRl+VSbv8/2lXFBW1Xgi/7p48DR/eDC7p8Juluw+AcIaE9PmkEApCKGqkNk7ytooGBJYqLgYM6D7hEwyXn21vwmtoOnEU2KTxWUfsckOaMrSlK2ylNIvdPtzFON+ObgXiGRm4r82azN0N7CcuWRAdEE0FcmC5oN3+d8FciOogoE+sWIpjnSnHIw9Vtpam2NtXhNA=
 before_install:
-- echo $super_secret_password | gpg --passphrase-fd 0 /assets/server.key.gpg
+- echo $super_secret_password | gpg --passphrase-fd 0 assets/server.key.gpg
 - export SFDX_AUTOUPDATE_DISABLE=true 
 - export SFDX_USE_GENERIC_UNIX_KEYCHAIN=true
 - export SFDX_DOMAIN_RETRY=300
@@ -17,7 +17,7 @@ before_install:
 - sfdx update
 - sfdx --version
 - sfdx plugins --core
-- sfdx force:auth:jwt:grant --clientid $CONSUMERKEY --jwtkeyfile assets/server.key
+- sfdx force:auth:jwt:grant --clientid $CONSUMERKEY --jwtkeyfile /assets/server.key
   --username $USERNAME --setdefaultdevhubusername -a HubOrg
 script:
 - sfdx force:org:create -v HubOrg -s -f config/project-scratch-def.json -a ciorg
